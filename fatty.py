@@ -44,10 +44,17 @@ if __name__ == "__main__":
     names=[]
     for n in all_content[:,1]:
         names.append(str(n))
-    unique,index,c=np.unique(names,return_index=True,return_counts=True)
-    final=all_content[index,:]
+    unique,index,ri,c=np.unique(names,return_index=True,return_inverse=True,return_counts=True)
+    final=[]
+    for u in range(len(unique)):
+        cor=[all_content[i,:] for i,r in enumerate(ri) if r == u]
+        num==np.array(cor)[:,3]
+        pos=np.argmax(num)
+        final.append(cor[pos])
+    final=np.array(final)
+    #final=all_content[index,:]
     df=pd.DataFrame(final)
-    df.to_csv('Result.csv')
+    df.to_csv('Result2.csv')
        
         
         
